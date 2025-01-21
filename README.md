@@ -13,7 +13,11 @@
     eksctl delete cluster -f cluster-config.yaml(삭제)
     삭제는 직접 cloudformation에서 지우는걸 권장
 
-3. git add, commit, push를 실행 그 후 자동생성 \
+
+3. kubectl apply -f .\aws-auth.yaml 해줄것
+    인증문제
+
+4. git add, commit, push를 실행 그 후 자동생성 \
 
 
 깔아야 할것
