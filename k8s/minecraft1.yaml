@@ -24,6 +24,14 @@ spec:
           value: "false" # online-mode 설정
         ports:
         - containerPort: 25565
+        #0121 nfs이용한 백업 추가본
+        volumeMounts:
+        - name: server1-data
+          mountPath: /data/world  # 월드 데이터 경로
+      volumes:
+      - name: server1-data
+        persistentVolumeClaim:
+          claimName: minecraft-server1-pvc
 ---
 apiVersion: v1
 kind: Service
