@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_REGION: ap-northeast-2
   CLUSTER_NAME: eks-cluster
 
 jobs:
@@ -22,33 +22,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. AWS CLI 및 kubectl 설치
-    - name: Install AWS CLI and kubectl
-      run: |
-        
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-        chmod +x kubectl
-        sudo mv kubectl /usr/local/bin
-
-    # 3. AWS CLI 설정 (OIDC 사용)
+    # 2. AWS CLI 설정 (OIDC 사용)
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
         role-to-assume: arn:aws:iam::767397791112:role/GitHubActionsEKSRole
         aws-region: ${{ env.AWS_REGION }}
 
-    # 4. EKS kubeconfig 업데이트
+    # 3. EKS kubeconfig 업데이트
     - name: Update kubeconfig
       run: |
         aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.CLUSTER_NAME }}
 
-    # 5. Kubernetes 배포
+    # 4. Kubernetes 배포
     - name: Deploy to EKS
       run: |
         kubectl apply -f k8s/minecraft1.yaml
         kubectl apply -f k8s/minecraft2.yaml
 
-    # 6. 배포 상태 확인
+    # 5. 배포 상태 확인
     - name: Verify Deployment
       run: |
         kubectl rollout status deployment/minecraft-server-1
