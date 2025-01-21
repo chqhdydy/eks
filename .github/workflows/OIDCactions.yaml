@@ -26,7 +26,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        role-to-assume: arn:aws:iam::767397791112:role/GitHubActionsEKSRole
         aws-region: ${{ env.AWS_REGION }}
 
     # 3. EKS kubeconfig 업데이트
