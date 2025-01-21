@@ -28,15 +28,16 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::767397791112:role/GitHubActionsEKSRole
         aws-region: ${{ env.AWS_REGION }}
-    # EBS CSI 드라이버 설치
-    - name: CSI driver install
-      run: |
-        kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.6"
 
     # 3. EKS kubeconfig 업데이트
     - name: Update kubeconfig
       run: |
         aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.CLUSTER_NAME }}
+    
+    # EBS CSI 드라이버 설치
+    - name: CSI driver install
+      run: |
+        kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.6"
 
     # 4. Kubernetes 배포
     - name: Deploy to EKS
