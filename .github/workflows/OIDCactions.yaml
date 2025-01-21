@@ -37,7 +37,7 @@ jobs:
     # EBS CSI 드라이버 설치
     - name: CSI driver install
       run: |
-        kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.6"
+        kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.11"
 
     # 4. Kubernetes 배포
     - name: Deploy to EKS
