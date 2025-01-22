@@ -25,7 +25,9 @@ nodeGroups:
     desiredCapacity: 3               # 원하는 노드 수
     minSize: 2                       # 최소 노드 수
     maxSize: 4                       # 최대 노드 수
-    volumeSize: 20                   # 노드 디스크 크기 (GiB)
+    volumeSize: 20  # 디스크 크기를 50GiB로 설정
+    volumeType: gp2
+
     iam:
       withAddonPolicies:
         autoScaler: true             # AutoScaler 정책 활성화
