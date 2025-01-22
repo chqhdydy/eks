@@ -2,26 +2,48 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: eks-cluster                   # 클러스터 이름
-  region: ap-northeast-2                # 리전 (서울 리전)
-  version: "1.27"                       # Kubernetes 버전
+  name: my-eks-cluster                # 클러스터 이름
+  region: ap-northeast-2                # 클러스터가 위치할 AWS 리전
+  version: "1.27"                    # Kubernetes 버전
 
 vpc:
   subnets:
     private:
-      ap-northeast-2a: { id: subnet-06737ff6973e505e3 } # 프라이빗 서브넷
-      ap-northeast-2c: { id: subnet-0dd4ba475138eb206 }
+      ap-northeast-2a:
+        id: subnet-06737ff6973e505e3 # 프라이빗 서브넷 ID
+      ap-northeast-2c:
+        id: subnet-0dd4ba475138eb206
     public:
-      ap-northeast-2a: { id: subnet-0b8a04d79f6c7d6ff } # 퍼블릭 서브넷
-      ap-northeast-2c: { id: subnet-0f1a6096656e5afeb }
+      ap-northeast-2a:
+        id: subnet-0b8a04d79f6c7d6ff # 퍼블릭 서브넷 ID
+      ap-northeast-2c:
+        id: subnet-0b8a04d79f6c7d6ff
 
 nodeGroups:
-  - name: worker-nodes
-    instanceType: t3.medium
-    desiredCapacity: 3                   # 기본 노드 수
-    minSize: 1                           # 최소 노드 수
-    maxSize: 3                           # 최대 노드 수
-    privateNetworking: true              # 프라이빗 서브넷에서 실행
-    ###########
-    #userData: |
-      # #!/bin/bash
+  - name: worker-nodes               # 노드 그룹 이름
+    instanceType: t3.medium          # EC2 인스턴스 유형
+    desiredCapacity: 3               # 원하는 노드 수
+    minSize: 2                       # 최소 노드 수
+    maxSize: 4                       # 최대 노드 수
+    volumeSize: 20                   # 노드 디스크 크기 (GiB)
+    iam:
+      withAddonPolicies:
+        autoScaler: true             # AutoScaler 정책 활성화
+        cloudWatch: true             # CloudWatch 접근 권한
+        ebs: true
+        albIngress: true
+    ssh:
+      allow: true
+      publicKeyName: my-key  # AWS에 등록한 키 페어 이름                    # SSH 액세스 허용
+    preBootstrapCommands:           # 사용자 정의 명령어 실행
+    - echo "p@ssw0rd" | passwd root --stdin
+    - sed -i "s/^#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config
+    - sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
+    - systemctl restart sshd       # SSH 데몬 재시작
+
+
+    
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["audit", "authenticator"] # 클러스터 로그 유형
