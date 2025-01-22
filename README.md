@@ -52,4 +52,3 @@ sudo mv /tmp/eksctl /usr/local/bin/
 }
 이거 추가해야함
 
-a
