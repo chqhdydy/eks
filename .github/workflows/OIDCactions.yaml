@@ -34,6 +34,11 @@ jobs:
       run: |
         aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.CLUSTER_NAME }}
     
+    # EBS CSI 드라이버 설치
+    - name: CSI driver install
+      run: |
+        kubectl delete csidriver ebs.csi.aws.com
+        kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.11"
 
     # 4. Kubernetes 배포
     - name: Deploy to EKS
@@ -48,6 +53,7 @@ jobs:
 
     # 5. 배포 상태 확인
     - name: Verify Deployment
+      timeout-minutes: 1  # 1분 제한
       run: |
         kubectl rollout status deployment/minecraft-server-1
         kubectl rollout status deployment/minecraft-server-2
