@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce                    # 단일 노드에서 읽기/쓰기 가능
   persistentVolumeReclaimPolicy: Retain # PVC 삭제 시 EBS 볼륨 유지
+  storageClassName: manual             # StorageClass 이름 설정
   csi:
     driver: ebs.csi.aws.com            # EBS CSI 드라이버
     volumeHandle: vol-04aa53136a8c824fc # AWS EBS 볼륨 ID
@@ -25,3 +26,4 @@ spec:
     requests:
       storage: 10Gi                    # 요청한 스토리지 크기
   volumeName: my-ebs-pv-1                # 바인딩할 PV 이름
+  storageClassName: manual             # StorageClass 이름 설정
