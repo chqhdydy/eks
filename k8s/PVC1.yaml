@@ -24,6 +24,6 @@ spec:
     - ReadWriteOnce                    # 단일 노드에서 읽기/쓰기 가능
   resources:
     requests:
-      storage: 10Gi                    # 요청한 스토리지 크기
+      storage: 20Gi                    # 요청한 스토리지 크기
   volumeName: my-ebs-pv-1                # 바인딩할 PV 이름
   storageClassName: manual             # StorageClass 이름 설정
