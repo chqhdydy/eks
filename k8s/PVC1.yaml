@@ -12,7 +12,7 @@ spec:
   storageClassName: manual             # StorageClass 이름 설정
   csi:
     driver: ebs.csi.aws.com            # EBS CSI 드라이버
-    volumeHandle: vol-04aa53136a8c824fc # AWS EBS 볼륨 ID
+    volumeHandle: vol-040957e38e82d386e # AWS EBS 볼륨 ID
     fsType: ext4                       # 파일 시스템 유형
 ---
 apiVersion: v1
