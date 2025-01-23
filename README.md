@@ -55,7 +55,7 @@ sudo mv /tmp/eksctl /usr/local/bin/
         }
     ]
 }
-이거 추가해야함
+이거 추가해야함a
 
 최종 eks-cluster-nodegroup-worker-NodeinstanceRole
 ![alt text](image.png) 
