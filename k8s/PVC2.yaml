@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: minecraft-server2-pvc
+  name: ebs-pvc-2
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
-  storageClassName: ebs-sc
+      storage: 20Gi   # 요청 크기
+  storageClassName: ebs-sc  # 사용할 StorageClass 이름

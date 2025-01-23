@@ -1,0 +1,17 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp2            # EBS 볼륨 유형 (gp2, gp3 등)
+  fsType: ext4         # 파일 시스템 타입
+  encrypted: "true"    # EBS 암호화 활성화 여부
+  #kmsKeyId: <kms-key-id>  # 선택 사항: KMS 키 ID
+  tags: |
+    kubernetes.io/cluster-name: my-cluster # 클러스터 이름 태그
+    environment: production                # 사용자 정의 태그
+    purpose: application-data              # 태그로 목적 정의
+allowVolumeExpansion: true # 볼륨 크기 확장 가능 여부
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete  # PVC 삭제 시 EBS 볼륨 자동 삭제(기본값은 retain으로 유지한다는 뜻)

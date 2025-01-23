@@ -11,7 +11,7 @@ permissions:
 
 env:
   AWS_REGION: ap-northeast-2
-  CLUSTER_NAME: my-eks-cluster
+  CLUSTER_NAME: my-cluster
 
 jobs:
   deploy:
@@ -42,6 +42,7 @@ jobs:
     # 4. Kubernetes 배포
     - name: Deploy to EKS
       run: |
+        kubectl apply -f k8s/storageclass.yaml
 
         kubectl apply -f k8s/PVC1.yaml
         
