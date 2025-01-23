@@ -45,13 +45,14 @@ jobs:
         kubectl apply -f k8s/storageclass.yaml
 
         kubectl apply -f k8s/PVC1.yaml
-        
+        kubectl apply -f k8s/PVC2.yaml
         kubectl apply -f k8s/minecraft1.yaml
+        kubectl apply -f k8s/minecraft2.yaml
         
 
     # 5. 배포 상태 확인
     - name: Verify Deployment
-      timeout-minutes: 1  # 1분 제한
+      timeout-minutes: 5  # 5분 제한
       run: |
         kubectl rollout status deployment/minecraft-server-1
         

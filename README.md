@@ -36,20 +36,26 @@ sudo mv /tmp/eksctl /usr/local/bin/
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "Statement1",
             "Effect": "Allow",
             "Action": [
                 "ec2:CreateVolume",
                 "ec2:DeleteVolume",
+                "ec2:DescribeVolumes",
                 "ec2:AttachVolume",
                 "ec2:DetachVolume",
-                "ec2:DescribeVolumes",
-                "ec2:DescribeVolumesModifications",
-                "ec2:ModifyVolume"
+                "ec2:ModifyVolume",
+                "ec2:DescribeTags",
+                "ec2:CreateTags",
+                "ec2:DeleteTags"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         }
     ]
 }
 이거 추가해야함
 
-aaaaa
+최종 eks-cluster-nodegroup-worker-NodeinstanceRole
+![alt text](image.png) 
