@@ -43,7 +43,6 @@ jobs:
     - name: Deploy to EKS
       run: |
         kubectl apply -f k8s/storageclass.yaml
-
         kubectl apply -f k8s/PVC1.yaml
         kubectl apply -f k8s/PVC2.yaml
         kubectl apply -f k8s/minecraft1.yaml
