@@ -51,7 +51,7 @@ jobs:
 
     # 5. 배포 상태 확인
     - name: Verify Deployment
-      timeout-minutes: 5  # 5분 제한
+      timeout-minutes: 2  # 2분 제한
       run: |
         kubectl rollout status deployment/minecraft-server-1
         
