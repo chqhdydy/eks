@@ -48,7 +48,7 @@ jobs:
         kubectl apply -f k8s/minecraft1.yaml
         kubectl apply -f k8s/minecraft2.yaml
         kubectl create configmap bungeecord-config --from-file=./k8s/config.yml -n default
-        kubectl apply -f bungeecode.yaml
+        kubectl apply -f k8s/bungeecode.yaml
 
     # 5. 배포 상태 확인
     - name: Verify Deployment
