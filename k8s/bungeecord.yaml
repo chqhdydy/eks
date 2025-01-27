@@ -38,10 +38,9 @@ metadata:
   name: bungeecord-service
   namespace: default
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 25577
     targetPort: 25577
-    nodePort: 30005
   selector:
-    app: bungeecord 
+    app: bungeecord
