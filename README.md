@@ -59,5 +59,5 @@ sudo mv /tmp/eksctl /usr/local/bin/
 
 최종 eks-cluster-nodegroup-worker-NodeinstanceRole
 ![alt text](image.png) 
-
+a
 a
